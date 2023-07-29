@@ -2,14 +2,22 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User, { IUser } from "../models/user.model";
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { name, email, password } = req.body;
+    const checkMail = await User.findOne({ email: email });
     const user: IUser = new User({
       name: name,
       email: email,
       password: password,
     });
+    if (checkMail?.email === user.email) {
+      return res.status(404).send("El email Ya se encuentra registrado");
+    }
 
     user.password = await user.encryptPass(user.password); //encripta la contraseña
     const saveUser = await user.save(); // guarda en la db mongoose
