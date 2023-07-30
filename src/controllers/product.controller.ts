@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Product from "../models/Product";
+import { uploadImage } from "../config/cloudinary";
 
 export const addProduct = async (req: Request, res: Response) => {
   try {
@@ -13,7 +14,8 @@ export const addProduct = async (req: Request, res: Response) => {
       price,
     });
     if (req.file) {
-      product.img = req.file.path;
+      const result = await uploadImage(req.file.path);
+      product.img = result.secure_url;
     }
     await product.save();
 
