@@ -4,17 +4,22 @@ import {
   loginUser,
   getUsers,
 } from "../controllers/user.controller";
+import { addProduct } from "../controllers/product.controller";
+import multer from "../../libs/multer";
 
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/api", (req, res) => {
   res.send("Server working OK!");
 });
 
 //User Routes
-router.post("/signup", createUser);
-router.post("/signin", loginUser);
-router.get("/users", getUsers);
-// router.get('/checktoken', verifyToken)
+router.post("/api/signup", createUser);
+router.post("/api/signin", loginUser);
+router.get("/api/users", getUsers);
+// router.get('/api/checktoken', verifyToken)
+
+// Products Routes
+router.post("/api/product", multer.single("image"), addProduct); //multer middleware permite aceptar imagenes
 
 export default router;
