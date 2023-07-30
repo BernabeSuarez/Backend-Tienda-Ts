@@ -22,7 +22,14 @@
     "mercadopago": "^1.5.17",
     "mongoose": "^7.4.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.1",
-    "typescript": "^5.1.6"
+    "path": "^0.12.7",
+    "typescript": "^5.1.6",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/multer": "^1.4.7",
+    "@types/uuid": "^9.0.2"
   }
 }
