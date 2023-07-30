@@ -4,7 +4,7 @@ import {
   loginUser,
   getUsers,
 } from "../controllers/user.controller";
-import { addProduct } from "../controllers/product.controller";
+import { addProduct, getProducts } from "../controllers/product.controller";
 import multer from "../../libs/multer";
 
 const router = Router();
@@ -21,5 +21,6 @@ router.get("/api/users", getUsers);
 
 // Products Routes
 router.post("/api/product", multer.single("image"), addProduct); //multer middleware permite aceptar imagenes
+router.get("/api/products", getProducts);
 
 export default router;
