@@ -6,7 +6,7 @@ export const addProduct = async (req: Request, res: Response) => {
   try {
     const { name, section, description, price } = req.body;
 
-    console.log(req.file);
+    //console.log(req.file);
     const product = new Product({
       name,
       section,
@@ -32,4 +32,31 @@ export const getProducts = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const updateProducts = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const updateProduct = await Product.findByIdAndUpdate(id, {
+      $set: req.body,
+    });
+    if (!updateProduct) {
+      return res.status(404).json({ message: "El producto no existe" });
+    }
+    res.status(200).json({ message: "El producto ha sido actualizado" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteProducts = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+
+    const deleteProduct = await Product.findByIdAndDelete(id);
+    if (!deleteProduct) {
+      return res.status(404).json({ message: "El producto no existe" });
+    }
+    res.status(200).json({ message: "Producto eliminado" });
+  } catch (error) {}
 };
