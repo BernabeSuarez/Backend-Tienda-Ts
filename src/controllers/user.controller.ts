@@ -44,12 +44,13 @@ export const loginUser = async (
   }
   const validPass = await user.validatePass(password);
   if (!validPass) {
-    return res.status(401).send("Contraseña Icorrecta");
+    return res.status(401).send("Contraseña Incorrecta");
   }
   const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY || "", {
     expiresIn: 60 * 60 * 24, //tiempo que tiene validez el token
   });
-  res.cookie("token", token, { maxAge: 900000, secure: true }); //almacena el token
+  res.cookie("Token", token, { maxAge: 900000, secure: false });
+  //almacena el token
   res.status(200).json({
     //devuelve el usuario
     id: user._id,

@@ -13,6 +13,7 @@ import {
 import multer from "../../libs/multer";
 import { rootController } from "../controllers/root.controller";
 import { payOrder } from "../controllers/payment.controller";
+import { verifyToken } from "../controllers/verifyToken";
 
 const router = Router();
 
@@ -22,7 +23,9 @@ router.get("/", rootController);
 router.post("/api/signup", createUser);
 router.post("/api/signin", loginUser);
 router.get("/api/users", getUsers);
-// router.get('/api/checktoken', verifyToken)
+router.get("/api/checktoken", verifyToken, (req, res) => {
+  res.send("Hello");
+});
 
 // Products Routes
 router.post("/api/product", multer.single("image"), addProduct); //multer middleware permite aceptar imagenes
