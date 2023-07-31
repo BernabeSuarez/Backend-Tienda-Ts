@@ -1,17 +1,21 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 import {
   createUser,
   loginUser,
   getUsers,
 } from "../controllers/user.controller";
-import { addProduct, getProducts } from "../controllers/product.controller";
+import {
+  addProduct,
+  deleteProducts,
+  getProducts,
+  updateProducts,
+} from "../controllers/product.controller";
 import multer from "../../libs/multer";
+import { rootController } from "../controllers/root.controller";
 
 const router = Router();
 
-router.get("/api", (req, res) => {
-  res.send("Server working OK!");
-});
+router.get("/", rootController);
 
 //User Routes
 router.post("/api/signup", createUser);
@@ -22,5 +26,9 @@ router.get("/api/users", getUsers);
 // Products Routes
 router.post("/api/product", multer.single("image"), addProduct); //multer middleware permite aceptar imagenes
 router.get("/api/products", getProducts);
+router.put("/api/product/:id", updateProducts);
+router.delete("/api/product/:id", deleteProducts);
+
+// Orders Routes
 
 export default router;
