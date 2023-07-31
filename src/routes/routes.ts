@@ -12,6 +12,7 @@ import {
 } from "../controllers/product.controller";
 import multer from "../../libs/multer";
 import { rootController } from "../controllers/root.controller";
+import { payOrder } from "../controllers/payment.controller";
 
 const router = Router();
 
@@ -31,4 +32,7 @@ router.delete("/api/product/:id", deleteProducts);
 
 // Orders Routes
 
+// Payment Routes
+
+router.post("/api/payment", payOrder);
 export default router;

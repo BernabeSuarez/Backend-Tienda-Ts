@@ -16,6 +16,7 @@ export const rootController = (req: Request, res: Response) => {
   <li>Express (Framework)</li>
   <li>Mongo Db</li>
   <li>Cloudinary</li>
+  <li>Typescript</li>
   </ul>
 </body>
 
