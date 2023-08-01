@@ -1,10 +1,11 @@
 import mercadopago from "mercadopago";
 import { Request, Response } from "express";
+import { IPayItems } from "../interfaces/IPayItems";
 
 mercadopago.configure({ access_token: process.env.MP_KEY || "" });
 
 export const payOrder = async (req: Request, res: Response) => {
-  const product = req.body;
+  const product: IPayItems = req.body;
   const result = await mercadopago.preferences
     .create({
       items: [
