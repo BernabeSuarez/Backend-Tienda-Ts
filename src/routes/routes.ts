@@ -13,7 +13,7 @@ import {
 import multer from "../../libs/multer";
 import { rootController } from "../controllers/root.controller";
 import { payOrder } from "../controllers/payment.controller";
-import { verifyToken } from "../controllers/verifyToken";
+import { verifyToken } from "../middlewares/verifyToken";
 import { addOrder, getOrders } from "../controllers/orders.controller";
 
 const router = Router();
