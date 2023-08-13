@@ -15,14 +15,18 @@ import { rootController } from "../controllers/root.controller";
 import { payOrder } from "../controllers/payment.controller";
 import { verifyToken } from "../middlewares/verifyToken";
 import { addOrder, getOrders } from "../controllers/orders.controller";
+import {
+  createUserValidation,
+  loginUserValidation,
+} from "../middlewares/userValidator";
 
 const router = Router();
 
 router.get("/", rootController);
 
 //User Routes
-router.post("/api/signup", createUser);
-router.post("/api/signin", loginUser);
+router.post("/api/signup", createUserValidation, createUser);
+router.post("/api/signin", loginUserValidation, loginUser);
 router.get("/api/users", getUsers);
 router.get("/api/checktoken", verifyToken, (req, res) => {
   res.send("Hello");
